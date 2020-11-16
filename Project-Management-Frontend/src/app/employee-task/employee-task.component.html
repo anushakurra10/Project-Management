@@ -1,0 +1,36 @@
+<h2 class="text-center">{{name}} Dashboard (Employee)</h2>
+<button class="btn text-center logout" routerLink="/login">Logout</button>
+<p class="empty-state-text" *ngIf="emp_tasks.length === 0"><em>There are no tasks assigned.</em></p>
+
+<div class="container" *ngIf="emp_tasks.length > 0">
+  <button class="btn text-center" (click)='save()'> Save</button>
+
+  <table class="GeneratedTable taskclass">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Status(%)</th>
+        <th>Not Delivered</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of emp_tasks">
+        <td>{{task.title}}</td>
+        <td>{{task.description}}</td>
+        <td>{{task.dueDate}}</td>
+        <td>
+          <select [(ngModel)]="task.status">
+            <option *ngFor="let status of statuses" [selected]="status == task.status">
+              {{status}} </option>
+          </select>
+          <ngb-progressbar type="info" [value]="task.status" [showValue]="true" [animated]="true"></ngb-progressbar>
+        </td>
+        <td><span class="dot" *ngIf="calcDue(task)"></span></td>
+        <td><textarea [(ngModel)]="task.notes"></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

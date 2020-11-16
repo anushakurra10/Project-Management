@@ -1,0 +1,64 @@
+<div class="centered-content">
+  <div class="modal-box offset-md-4">
+    <h5 class="title">
+      Add new task
+    </h5>
+    <form #form="ngForm" class=" mt-4" >
+      <fieldset [disabled]="getState()" >
+
+    <div class="form-group">
+      <label for="title" class="col-2">Task Name:</label>
+      <input
+        type="text"
+        id="title"
+        class="form-control col-4"
+        [(ngModel)]="userData.title" 
+        name="title"
+        required>
+    </div>
+    
+
+    <div class="form-group">
+      <label for="description" class="col-2">Task Description:</label>
+        <textarea required id="description"
+        class="form-control col-4"
+        [(ngModel)]="userData.description" 
+        name="description" >
+        </textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="dueDate" class="col-2">Task Deadline:</label>
+      <input
+      type="datetime-local"
+      id="dueDate"
+      class="form-control col-4"
+      [(ngModel)]="userData.dueDate"
+      [min]="time|date: 'yyyy-MM-ddThh:mm:ss'" 
+      name="dueDate"
+      required>
+    </div>
+
+
+
+
+    <div class="form-group">
+      <label for="dueDate" class="col-2">Assign To:</label>
+
+      <ng-multiselect-dropdown [disabled]="getState()" name="employees_list" [(ngModel)]="userData.employees"  [placeholder]="'Select Employees'" [data]="employees_list" [settings]="dropdownSettings"
+      required  class="form-control col-4">
+    </ng-multiselect-dropdown>
+    </div>
+     
+    
+    <div class="buttons is-right">
+
+      <button class="button btn btn-primary is-primary has-text-white is-medium" [disabled]="!form.valid" *ngIf ="!edit && taskId ==''" (click)="createTask(form, userData)"  >Create</button>
+      <button class="button btn btn-primary is-primary has-text-white is-medium" [disabled]="!form.valid" *ngIf ="showbtn()" (click)="SaveTask(form, userData)"  >Update</button>
+    </div>
+  </fieldset>
+    </form>
+    <button class="button btn btn-primary is-medium back"    routerLink="/tasks">Back</button>
+
+  </div>
+</div>

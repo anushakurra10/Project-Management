@@ -1,0 +1,44 @@
+<h2 class="text-center">{{name}} Dashboard (Manager)</h2>
+<h5 class="text-center">Tasks Created By Me</h5>
+<button class="btn text-center logout" routerLink="/login">Logout</button>
+
+<button class="btn text-center" routerLink="/new-task"><i class="fa fa-plus"></i> Add New Task</button>
+<p class="empty-state-text" *ngIf="tasks_list.length === 0"><em>There are no tasks here Click the add button to create a
+    new task</em></p>
+
+<div class="container taskclass" *ngIf="tasks_list.length > 0">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered GeneratedTable">
+        <thead>
+          <tr>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Task Title</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Status(%)</th>
+            <th scope="col">Not Delivered</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks_list">
+            <td>{{task.employee_name}}</td>
+            <td>{{task.title}}</td>
+            <td>{{task.dueDate}}</td>
+            <td>
+              <ngb-progressbar type="info" [value]="task.status" [showValue]="true" [animated]="true"></ngb-progressbar>
+            </td>
+            <td><span class="dot" *ngIf="calcDue(task)"></span></td>
+            <td>
+              <button type="button" class="btn btn-primary"
+                [routerLink]="['../new-task',{taskId:task._id,'edit':false}]"><i class="fa fa-eye"
+                  aria-hidden="true"></i></button>
+              <button type="button" class="btn btn-success"
+                [routerLink]="['../new-task',{taskId:task._id,'edit':true}]"><i class="fa fa-edit"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
