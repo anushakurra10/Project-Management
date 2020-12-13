@@ -1,5 +1,5 @@
-# Tripaxy_Task
-Assignment for tripaxy,based on MEAN JavaScript Stack, MongoDB, Express, Angular 8, and Node.js
+
+Based on MEAN JavaScript Stack, MongoDB, Express, Angular 8, and Node.js
 
 Project Management System MEAN Application
 
